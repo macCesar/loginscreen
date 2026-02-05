@@ -1,0 +1,41 @@
+"#content": {
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	layout: "vertical",
+	top: "30%",
+	opacity: 0
+}
+
+"#welcomeIcon": {
+	font: { fontSize: 72 },
+	textAlign: "center",
+	width: Ti.UI.FILL,
+	touchEnabled: false
+}
+
+"#welcomeTitle": {
+	color: "textColor",
+	font: { fontSize: 28, fontWeight: "bold" },
+	textAlign: "center",
+	width: Ti.UI.FILL,
+	top: 16,
+	touchEnabled: false
+}
+
+"#welcomeText": {
+	color: "textMutedColor",
+	font: { fontSize: 16 },
+	textAlign: "center",
+	width: Ti.UI.FILL,
+	top: 12,
+	touchEnabled: false
+}
+
+"#logoutBtn": {
+	width: Ti.UI.FILL,
+	height: 48,
+	top: 40,
+	left: 40,
+	right: 40,
+	borderRadius: 24
+}

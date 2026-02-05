@@ -1,0 +1,15 @@
+<Alloy>
+  <Window id="win">
+    <View id="bgTop" class="bgTop"/>
+
+    <View id="content">
+      <Label id="welcomeIcon" class="screenIcon">🎉</Label>
+      <Label id="welcomeTitle" class="screenTitle">Welcome!</Label>
+      <Label id="welcomeText">You have successfully signed in.</Label>
+
+      <View id="logoutBtn" class="primaryBtn" accessibilityLabel="Logout button" accessibilityHint="Tap to sign out of your account" onClick="doLogout">
+        <Label id="logoutBtnLabel" class="primaryBtnLabel">Sign Out</Label>
+      </View>
+    </View>
+  </Window>
+</Alloy>

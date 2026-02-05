@@ -1,0 +1,43 @@
+/* ── Signup: screen-specific overrides ── */
+
+"#scrollView": {
+	top: 60,
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL
+}
+
+"#content": {
+	width: "85%",
+	height: Ti.UI.SIZE,
+	layout: "vertical",
+	top: 20,
+	opacity: 0
+}
+
+"#loader": {
+	top: 16,
+	visible: false
+}
+
+"#loginRow": {
+	width: Ti.UI.SIZE,
+	height: Ti.UI.SIZE,
+	layout: "horizontal",
+	top: 20,
+	bottom: 40
+}
+
+"#loginText": {
+	color: "textMutedColor",
+	font: { fontSize: 13 },
+	width: Ti.UI.SIZE,
+	height: Ti.UI.SIZE,
+	touchEnabled: false
+}
+
+"#loginLink": {
+	color: "linkColor",
+	font: { fontSize: 13, fontWeight: "bold" },
+	width: Ti.UI.SIZE,
+	height: Ti.UI.SIZE
+}

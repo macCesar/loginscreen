@@ -1,0 +1,66 @@
+{
+	"backgroundColor": {
+		"light": "#f6f7fb",
+		"dark": "#1a1a2e"
+	},
+	"bgBottomColor": {
+		"light": "#f6f7fb",
+		"dark": "#1a1a2e"
+	},
+	"cardColor": {
+		"light": "#ffffff",
+		"dark": "#16213e"
+	},
+	"accentColor": {
+		"light": "#e7ecf5",
+		"dark": "#0f3460"
+	},
+	"primaryColor": {
+		"light": "#e94560",
+		"dark": "#e94560"
+	},
+	"primaryDarkColor": {
+		"light": "#c81d4e",
+		"dark": "#c81d4e"
+	},
+	"textColor": {
+		"light": "#0b1220",
+		"dark": "#ffffff"
+	},
+	"textMutedColor": {
+		"light": "#667085",
+		"dark": "#8d99ae"
+	},
+	"hintTextColor": {
+		"light": "#94a3b8",
+		"dark": "#556677"
+	},
+	"underlineColor": {
+		"light": "#d5dbe7",
+		"dark": "#0f3460"
+	},
+	"errorColor": {
+		"light": "#e63946",
+		"dark": "#e63946"
+	},
+	"successColor": {
+		"light": "#2fbf71",
+		"dark": "#4ecca3"
+	},
+	"linkColor": {
+		"light": "#e94560",
+		"dark": "#e94560"
+	},
+	"buttonTextColor": {
+		"light": "#ffffff",
+		"dark": "#ffffff"
+	},
+	"gradientTopStart": {
+		"light": "#e8effa",
+		"dark": "#16213e"
+	},
+	"gradientTopEnd": {
+		"light": "#cdd8f4",
+		"dark": "#0f3460"
+	}
+}

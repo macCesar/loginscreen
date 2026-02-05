@@ -1,0 +1,84 @@
+/* ── Index: Login screen overrides ── */
+
+"#logoContainer": {
+	top: "10%",
+	width: Ti.UI.SIZE,
+	height: Ti.UI.SIZE,
+	layout: "vertical",
+	opacity: 0
+}
+
+"#appTitle": {
+	color: "textColor",
+	font: { fontSize: 28, fontWeight: "bold" },
+	textAlign: "center",
+	width: Ti.UI.FILL,
+	top: 8,
+	touchEnabled: false
+}
+
+"#card": {
+	width: "85%",
+	height: Ti.UI.SIZE,
+	layout: "vertical",
+	center: { y: "55%" },
+	backgroundColor: "cardColor",
+	borderRadius: 16,
+	opacity: 0
+}
+
+"#emailGroup": {
+	top: 28,
+	left: 20,
+	right: 20
+}
+
+"#passwordGroup": {
+	left: 20,
+	right: 20
+}
+
+"#forgotPassword": {
+	color: "linkColor",
+	font: { fontSize: 12 },
+	top: 12,
+	left: 20,
+	right: 20,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT
+}
+
+"#loginBtn": {
+	left: 20,
+	right: 20,
+	width: Ti.UI.FILL
+}
+
+"#loader": {
+	visible: false
+}
+
+"#signupRow": {
+	bottom: "5%",
+	width: Ti.UI.SIZE,
+	height: Ti.UI.SIZE,
+	layout: "horizontal",
+	opacity: 0,
+	zIndex: 10
+}
+
+"#signupText": {
+	color: "textMutedColor",
+	font: { fontSize: 13 },
+	width: Ti.UI.SIZE,
+	height: Ti.UI.SIZE,
+	touchEnabled: false
+}
+
+"#signupLink": {
+	color: "linkColor",
+	font: { fontSize: 13, fontWeight: "bold" },
+	width: Ti.UI.SIZE,
+	height: Ti.UI.SIZE
+}

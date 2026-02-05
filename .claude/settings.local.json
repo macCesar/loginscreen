@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(ti-ui)",
+      "Skill(ti-expert)",
+      "Bash(tree:*)"
+    ]
+  }
+}

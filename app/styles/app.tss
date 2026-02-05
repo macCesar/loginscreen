@@ -1,0 +1,143 @@
+/*
+ * Global Design Tokens & Shared Styles
+ *
+ * Colors:
+ *   bg-dark:    #1a1a2e
+ *   bg-card:    #16213e
+ *   bg-accent:  #0f3460
+ *   primary:    #e94560
+ *   primary-dk: #c81d4e
+ *   text-main:  #ffffff
+ *   text-muted: #8d99ae
+ *   error:      #e63946
+ *   success:    #4ecca3
+ */
+
+"Window": {
+	backgroundColor: "backgroundColor"
+}
+
+/* ── Shared background layers ── */
+".bgTop": {
+	width: Ti.UI.FILL,
+	height: "55%",
+	top: 0,
+	touchEnabled: false
+}
+
+".bgBottom": {
+	width: Ti.UI.FILL,
+	height: "50%",
+	bottom: 0,
+	touchEnabled: false,
+	backgroundColor: "bgBottomColor"
+}
+
+/* ── Shared header / back button ── */
+".header": {
+	top: 0,
+	left: 0,
+	width: Ti.UI.FILL,
+	height: 60,
+	zIndex: 10
+}
+
+".backBtn": {
+	color: "linkColor",
+	font: { fontSize: 16 },
+	left: 20,
+	bottom: 8,
+	width: Ti.UI.SIZE,
+	height: Ti.UI.SIZE
+}
+
+/* ── Shared field styles ── */
+".fieldGroup": {
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	layout: "vertical",
+	top: 20
+}
+
+".fieldLabel": {
+	color: "textMutedColor",
+	font: { fontSize: 12, fontWeight: "semibold" },
+	left: 4,
+	width: Ti.UI.SIZE,
+	height: Ti.UI.SIZE,
+	touchEnabled: false
+}
+
+".field": {
+	width: Ti.UI.FILL,
+	height: 40,
+	top: 4,
+	color: "textColor",
+	hintTextColor: "hintTextColor",
+	font: { fontSize: 15 },
+	paddingLeft: 4
+}
+
+".field[platform=android]": {
+	backgroundColor: "transparent"
+}
+
+".underline": {
+	width: Ti.UI.FILL,
+	height: 2,
+	backgroundColor: "underlineColor",
+	top: 0
+}
+
+".fieldError": {
+	color: "errorColor",
+	font: { fontSize: 11 },
+	left: 4,
+	top: 4,
+	width: Ti.UI.SIZE,
+	height: 14,
+	opacity: 0,
+	touchEnabled: false
+}
+
+/* ── Shared primary button ── */
+".primaryBtn": {
+	width: Ti.UI.FILL,
+	height: 48,
+	top: 28,
+	borderRadius: 24
+}
+
+".primaryBtnLabel": {
+	color: "buttonTextColor",
+	font: { fontSize: 16, fontWeight: "bold" },
+	textAlign: "center",
+	width: Ti.UI.FILL,
+	touchEnabled: false
+}
+
+/* ── Shared screen title area ── */
+".screenIcon": {
+	font: { fontSize: 56 },
+	textAlign: "center",
+	width: Ti.UI.FILL,
+	touchEnabled: false
+}
+
+".screenTitle": {
+	color: "textColor",
+	font: { fontSize: 26, fontWeight: "bold" },
+	textAlign: "center",
+	width: Ti.UI.FILL,
+	top: 12,
+	touchEnabled: false
+}
+
+".screenSubtitle": {
+	color: "textMutedColor",
+	font: { fontSize: 14 },
+	textAlign: "center",
+	width: Ti.UI.FILL,
+	top: 8,
+	touchEnabled: false
+}

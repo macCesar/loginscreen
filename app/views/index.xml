@@ -1,0 +1,49 @@
+<Alloy>
+  <Window id="win">
+    <!-- Background gradient -->
+    <View id="bgTop" class="bgTop"/>
+    <View id="bgBottom" class="bgBottom"/>
+
+    <!-- Logo / App Title -->
+    <View id="logoContainer">
+      <Label id="logoIcon" class="screenIcon">🔐</Label>
+      <Label id="appTitle">Welcome Back</Label>
+      <Label id="appSubtitle" class="screenSubtitle">Sign in to continue</Label>
+    </View>
+
+    <!-- Login Form Card -->
+    <View id="card">
+      <!-- Email Field -->
+      <View id="emailGroup" class="fieldGroup">
+        <Label id="emailLabel" class="fieldLabel">Email</Label>
+        <TextField id="emailField" class="field" hintText="you@example.com" keyboardType="Ti.UI.KEYBOARD_TYPE_EMAIL" autofillType="Ti.UI.AUTOFILL_TYPE_USERNAME" autocapitalization="Ti.UI.TEXT_AUTOCAPITALIZATION_NONE" autocorrect="false" returnKeyType="Ti.UI.RETURNKEY_NEXT" onReturn="focusPassword" onChange="validateEmail"/>
+        <View id="emailUnderline" class="underline"/>
+        <Label id="emailError" class="fieldError">Please enter a valid email address</Label>
+      </View>
+
+      <!-- Password Field -->
+      <View id="passwordGroup" class="fieldGroup">
+        <Label id="passwordLabel" class="fieldLabel">Password</Label>
+        <TextField id="passwordField" class="field" hintText="Your password" passwordMask="true" autofillType="Ti.UI.AUTOFILL_TYPE_PASSWORD" returnKeyType="Ti.UI.RETURNKEY_DONE" onReturn="doLogin"/>
+        <View id="passwordUnderline" class="underline"/>
+      </View>
+
+      <!-- Forgot Password -->
+      <Label id="forgotPassword" onClick="forgotTap">Forgot Password?</Label>
+
+      <!-- Login Button -->
+      <View id="loginBtn" class="primaryBtn" onClick="doLogin">
+        <Label id="loginBtnLabel" class="primaryBtnLabel">Sign In</Label>
+      </View>
+
+      <!-- Loading indicator (hidden by default) -->
+      <ActivityIndicator id="loader" visible="false"/>
+    </View>
+
+    <!-- Sign Up -->
+    <View id="signupRow">
+      <Label id="signupText">Don't have an account? </Label>
+      <Label id="signupLink" onClick="signupTap">Sign Up</Label>
+    </View>
+  </Window>
+</Alloy>

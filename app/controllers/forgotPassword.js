@@ -1,6 +1,7 @@
-const { isValidEmail, showFieldError, hideFieldError, setUnderlineColor } = require('helpers/validation')
+const { isValidEmail, showFieldError, hideFieldError, setUnderlineColor, colors } = require('helpers/validation')
 const { shakeView, addButtonFeedback } = require('helpers/animation')
 const { createCleanup } = require('helpers/cleanup')
+const { applyBgTopGradient, applyPrimaryButtonGradient } = require('helpers/gradients')
 
 let emailValid = false
 const cleanupTracker = createCleanup()
@@ -25,33 +26,9 @@ function runEntrance() {
 }
 
 function applyGradients() {
-	$.bgTop.backgroundGradient = {
-		type: 'linear',
-		startPoint: { x: '0%', y: '0%' },
-		endPoint: { x: '100%', y: '100%' },
-		colors: [
-			{ color: Ti.UI.fetchSemanticColor('gradientTopStart'), offset: 0.0 },
-			{ color: Ti.UI.fetchSemanticColor('gradientTopEnd'), offset: 1.0 }
-		]
-	}
-	$.sendBtn.backgroundGradient = {
-		type: 'linear',
-		startPoint: { x: '0%', y: '50%' },
-		endPoint: { x: '100%', y: '50%' },
-		colors: [
-			{ color: Ti.UI.fetchSemanticColor('primaryColor'), offset: 0.0 },
-			{ color: Ti.UI.fetchSemanticColor('primaryDarkColor'), offset: 1.0 }
-		]
-	}
-	$.backToLoginBtn.backgroundGradient = {
-		type: 'linear',
-		startPoint: { x: '0%', y: '50%' },
-		endPoint: { x: '100%', y: '50%' },
-		colors: [
-			{ color: Ti.UI.fetchSemanticColor('primaryColor'), offset: 0.0 },
-			{ color: Ti.UI.fetchSemanticColor('primaryDarkColor'), offset: 1.0 }
-		]
-	}
+	applyBgTopGradient($.bgTop)
+	applyPrimaryButtonGradient($.sendBtn)
+	applyPrimaryButtonGradient($.backToLoginBtn)
 }
 
 // ── Email validation ──
@@ -61,13 +38,13 @@ function validateEmail() {
 
 	if (value.length === 0) {
 		hideFieldError($.emailError)
-		setUnderlineColor($.emailUnderline, '#0f3460')
+		setUnderlineColor($.emailUnderline, colors.base)
 	} else if (!emailValid) {
 		showFieldError($.emailError)
-		setUnderlineColor($.emailUnderline, '#e63946')
+		setUnderlineColor($.emailUnderline, colors.error)
 	} else {
 		hideFieldError($.emailError)
-		setUnderlineColor($.emailUnderline, '#4ecca3')
+		setUnderlineColor($.emailUnderline, colors.success)
 	}
 }
 
@@ -80,18 +57,18 @@ function doSend() {
 		return
 	}
 
-	$.sendBtnLabel.visible = false
-	$.loader.visible = true
+	$.sendBtnLabel.applyProperties({ visible: false })
+	$.loader.applyProperties({ visible: true })
 	$.loader.show()
 
 	cleanupTracker.timeout(function () {
 		$.loader.hide()
-		$.loader.visible = false
-		$.sendBtnLabel.visible = true
+		$.loader.applyProperties({ visible: false })
+		$.sendBtnLabel.applyProperties({ visible: true })
 
 		$.content.animate({ opacity: 0, duration: 300 }, function () {
-			$.content.visible = false
-			$.confirmation.visible = true
+			$.content.applyProperties({ visible: false })
+			$.confirmation.applyProperties({ visible: true })
 			$.confirmation.animate({
 				opacity: 1,
 				duration: 500,

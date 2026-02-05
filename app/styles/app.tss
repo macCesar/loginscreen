@@ -20,14 +20,14 @@
 /* ── Shared background layers ── */
 ".bgTop": {
 	width: Ti.UI.FILL,
-	height: "55%",
+	height: Ti.UI.FILL,
 	top: 0,
 	touchEnabled: false
 }
 
 ".bgBottom": {
 	width: Ti.UI.FILL,
-	height: "50%",
+	height: Ti.UI.FILL,
 	bottom: 0,
 	touchEnabled: false,
 	backgroundColor: "bgBottomColor"

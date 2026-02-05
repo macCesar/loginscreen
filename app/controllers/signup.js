@@ -1,6 +1,9 @@
-const { isValidEmail, showFieldError, hideFieldError, setUnderlineColor } = require('helpers/validation')
+const { isValidEmail, showFieldError, hideFieldError, setUnderlineColor, colors } = require('helpers/validation')
 const { shakeView, addButtonFeedback } = require('helpers/animation')
 const { createCleanup } = require('helpers/cleanup')
+const { applyBgTopGradient, applyPrimaryButtonGradient } = require('helpers/gradients')
+const { openModal } = require('services/navigation')
+const { login } = require('services/auth')
 
 let emailValid = false
 let passwordValid = false
@@ -30,24 +33,8 @@ function runEntrance() {
 }
 
 function applyGradients() {
-	$.bgTop.backgroundGradient = {
-		type: 'linear',
-		startPoint: { x: '0%', y: '0%' },
-		endPoint: { x: '100%', y: '100%' },
-		colors: [
-			{ color: Ti.UI.fetchSemanticColor('gradientTopStart'), offset: 0.0 },
-			{ color: Ti.UI.fetchSemanticColor('gradientTopEnd'), offset: 1.0 }
-		]
-	}
-	$.signupBtn.backgroundGradient = {
-		type: 'linear',
-		startPoint: { x: '0%', y: '50%' },
-		endPoint: { x: '100%', y: '50%' },
-		colors: [
-			{ color: Ti.UI.fetchSemanticColor('primaryColor'), offset: 0.0 },
-			{ color: Ti.UI.fetchSemanticColor('primaryDarkColor'), offset: 1.0 }
-		]
-	}
+	applyBgTopGradient($.bgTop)
+	applyPrimaryButtonGradient($.signupBtn)
 }
 
 // ── Email validation ──
@@ -57,13 +44,13 @@ function validateEmail() {
 
 	if (value.length === 0) {
 		hideFieldError($.emailError)
-		setUnderlineColor($.emailUnderline, '#0f3460')
+		setUnderlineColor($.emailUnderline, colors.base)
 	} else if (!emailValid) {
 		showFieldError($.emailError)
-		setUnderlineColor($.emailUnderline, '#e63946')
+		setUnderlineColor($.emailUnderline, colors.error)
 	} else {
 		hideFieldError($.emailError)
-		setUnderlineColor($.emailUnderline, '#4ecca3')
+		setUnderlineColor($.emailUnderline, colors.success)
 	}
 }
 
@@ -74,13 +61,13 @@ function validatePassword() {
 
 	if (value.length === 0) {
 		hideFieldError($.passwordError)
-		setUnderlineColor($.passwordUnderline, '#0f3460')
+		setUnderlineColor($.passwordUnderline, colors.base)
 	} else if (!passwordValid) {
 		showFieldError($.passwordError)
-		setUnderlineColor($.passwordUnderline, '#e63946')
+		setUnderlineColor($.passwordUnderline, colors.error)
 	} else {
 		hideFieldError($.passwordError)
-		setUnderlineColor($.passwordUnderline, '#4ecca3')
+		setUnderlineColor($.passwordUnderline, colors.success)
 	}
 
 	if ($.confirmField.value.length > 0) {
@@ -95,13 +82,13 @@ function validateConfirm() {
 
 	if (value.length === 0) {
 		hideFieldError($.confirmError)
-		setUnderlineColor($.confirmUnderline, '#0f3460')
+		setUnderlineColor($.confirmUnderline, colors.base)
 	} else if (!confirmValid) {
 		showFieldError($.confirmError)
-		setUnderlineColor($.confirmUnderline, '#e63946')
+		setUnderlineColor($.confirmUnderline, colors.error)
 	} else {
 		hideFieldError($.confirmError)
-		setUnderlineColor($.confirmUnderline, '#4ecca3')
+		setUnderlineColor($.confirmUnderline, colors.success)
 	}
 }
 
@@ -146,17 +133,28 @@ function doSignup() {
 		return
 	}
 
-	$.signupBtnLabel.visible = false
-	$.loader.visible = true
+	$.signupBtnLabel.applyProperties({ visible: false })
+	$.loader.applyProperties({ visible: true })
 	$.loader.show()
 
 	cleanupTracker.timeout(function () {
 		$.loader.hide()
-		$.loader.visible = false
-		$.signupBtnLabel.visible = true
-		alert('Account created successfully!')
+		$.loader.applyProperties({ visible: false })
+		$.signupBtnLabel.applyProperties({ visible: true })
+
+		// Save login state
+		login()
+
+		// Close signup modal and navigate to home
 		$.win.close({ animated: true })
-	}, 1500)
+
+		// Wait for modal close animation then open home
+		// Use setTimeout (not cleanupTracker) so this runs even after cleanup
+		setTimeout(function () {
+			const { open } = require('services/navigation')
+			open('home')
+		}, 300)
+	}, 500)
 }
 
 // ── Button press feedback ──

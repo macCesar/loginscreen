@@ -1,6 +1,7 @@
 const { isValidEmail, showFieldError, hideFieldError, setUnderlineColor, colors } = require('helpers/validation')
 const { createCleanup } = require('helpers/cleanup')
 const { applyBgTopGradient, applyPrimaryButtonGradient } = require('helpers/gradients')
+const { userExists } = require('services/auth')
 
 let emailValid = false
 const cleanupTracker = createCleanup()
@@ -30,6 +31,7 @@ function applyGradients() {
 function validateEmail() {
 	const value = $.emailField.value.trim()
 	emailValid = isValidEmail(value)
+	$.emailError.applyProperties({ text: 'Please enter a valid email address' })
 
 	if (value.length === 0) {
 		hideFieldError($.emailError)
@@ -48,6 +50,14 @@ function doSend() {
 	validateEmail()
 
 	if (!emailValid) {
+		$.shakeAnim.shake($.emailGroup, 8)
+		return
+	}
+
+	if (!userExists($.emailField.value)) {
+		$.emailError.applyProperties({ text: 'No account found for this email' })
+		showFieldError($.emailError)
+		setUnderlineColor($.emailUnderline, colors.error)
 		$.shakeAnim.shake($.emailGroup, 8)
 		return
 	}

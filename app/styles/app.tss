@@ -55,6 +55,7 @@
 '.horizontal': { layout: 'horizontal' }
 '.keyboard-type-email': { keyboardType: Ti.UI.KEYBOARD_TYPE_EMAIL }
 '.mb-10': { bottom: 40 }
+'.mt-1': { top: 4 }
 '.mt-10': { top: 40 }
 '.mt-2': { top: 8 }
 '.mt-3': { top: 12 }

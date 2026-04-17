@@ -1,4 +1,4 @@
-const { logout } = require('services/auth')
+const { getCurrentUser, logout } = require('services/auth')
 const { createCleanup } = require('helpers/cleanup')
 const { applyBgTopGradient, applyPrimaryButtonGradient } = require('helpers/gradients')
 const Logger = require('services/logger')
@@ -7,6 +7,18 @@ const cleanupTracker = createCleanup()
 const log = Logger.create('HOME')
 
 log.info('Controller loaded')
+
+const currentUser = getCurrentUser()
+
+if (currentUser) {
+	$.welcomeTitle.applyProperties({ text: `Welcome, ${currentUser.name}!` })
+	$.welcomeText.applyProperties({ text: 'You have successfully signed in with a local account.' })
+	$.sessionEmail.applyProperties({ text: currentUser.email })
+	$.sessionMeta.applyProperties({ text: `Local user ID: ${currentUser.id}` })
+} else {
+	$.sessionEmail.applyProperties({ text: 'No local user loaded' })
+	$.sessionMeta.applyProperties({ text: '' })
+}
 
 // ── Entrance animation ──
 function runEntrance() {

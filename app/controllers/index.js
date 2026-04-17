@@ -1,5 +1,5 @@
 const { createCleanup } = require('helpers/cleanup')
-const { isLoggedIn, login } = require('services/auth')
+const { authenticate, isLoggedIn, login } = require('services/auth')
 const Logger = require('services/logger')
 const { openModal, open } = require('services/navigation')
 const { applyBgTopGradient, applyPrimaryButtonGradient } = require('helpers/gradients')
@@ -44,6 +44,7 @@ function applyGradients() {
 function validateEmail() {
   const value = $.emailField.value.trim()
   emailValid = isValidEmail(value)
+  $.emailError.applyProperties({ text: 'Please enter a valid email address' })
 
   if (value.length === 0) {
     hideFieldError($.emailError)
@@ -54,6 +55,13 @@ function validateEmail() {
   } else {
     hideFieldError($.emailError)
     setUnderlineColor($.emailUnderline, colors.success)
+  }
+}
+
+function validatePasswordEntry() {
+  if ($.passwordField.value.length > 0) {
+    hideFieldError($.passwordError)
+    setUnderlineColor($.passwordUnderline, colors.base)
   }
 }
 
@@ -68,6 +76,7 @@ function doLogin() {
   validateEmail()
 
   const password = $.passwordField.value
+  const email = $.emailField.value.trim()
 
   if (!emailValid) {
     $.shakeAnim.shake($.emailGroup, 8)
@@ -75,6 +84,27 @@ function doLogin() {
   }
 
   if (!password || password.length === 0) {
+    $.passwordError.applyProperties({ text: 'Please enter your password' })
+    showFieldError($.passwordError)
+    setUnderlineColor($.passwordUnderline, colors.error)
+    $.shakeAnim.shake($.passwordGroup, 8)
+    return
+  }
+
+  const authResult = authenticate(email, password)
+
+  if (!authResult.ok && authResult.code === 'USER_NOT_FOUND') {
+    $.emailError.applyProperties({ text: 'No account found for this email' })
+    showFieldError($.emailError)
+    setUnderlineColor($.emailUnderline, colors.error)
+    $.shakeAnim.shake($.emailGroup, 8)
+    return
+  }
+
+  if (!authResult.ok) {
+    $.passwordError.applyProperties({ text: 'Incorrect password for this email' })
+    showFieldError($.passwordError)
+    setUnderlineColor($.passwordUnderline, colors.error)
     $.shakeAnim.shake($.passwordGroup, 8)
     return
   }
@@ -90,7 +120,7 @@ function doLogin() {
     $.loginBtnLabel.applyProperties({ visible: true })
 
     // Save login state and navigate to home
-    login()
+    login(authResult.user.email)
     log.info('State saved, closing login window')
     $.win.close({ animated: true })
 

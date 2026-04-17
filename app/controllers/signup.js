@@ -1,8 +1,7 @@
 const { isValidEmail, showFieldError, hideFieldError, setUnderlineColor, colors } = require('helpers/validation')
 const { createCleanup } = require('helpers/cleanup')
 const { applyBgTopGradient, applyPrimaryButtonGradient } = require('helpers/gradients')
-const { openModal } = require('services/navigation')
-const { login } = require('services/auth')
+const { createUser } = require('services/auth')
 
 let emailValid = false
 let passwordValid = false
@@ -36,6 +35,7 @@ function applyGradients() {
 function validateEmail() {
 	const value = $.emailField.value.trim()
 	emailValid = isValidEmail(value)
+	$.emailError.applyProperties({ text: 'Please enter a valid email address' })
 
 	if (value.length === 0) {
 		hideFieldError($.emailError)
@@ -128,6 +128,20 @@ function doSignup() {
 		return
 	}
 
+	const createResult = createUser({
+		name: name,
+		email: $.emailField.value,
+		password: $.passwordField.value
+	})
+
+	if (!createResult.ok && createResult.code === 'USER_EXISTS') {
+		$.emailError.applyProperties({ text: 'This email is already registered' })
+		showFieldError($.emailError)
+		setUnderlineColor($.emailUnderline, colors.error)
+		$.shakeAnim.shake($.emailGroup, 8)
+		return
+	}
+
 	$.signupBtnLabel.applyProperties({ visible: false })
 	$.loader.applyProperties({ visible: true })
 	$.loader.show()
@@ -137,18 +151,17 @@ function doSignup() {
 		$.loader.applyProperties({ visible: false })
 		$.signupBtnLabel.applyProperties({ visible: true })
 
-		// Save login state
-		login()
+		const dialog = Ti.UI.createAlertDialog({
+			buttonNames: ['Sign In'],
+			message: 'Your account was saved locally. Sign in with the email and password you just created.',
+			title: 'Account Created'
+		})
 
-		// Close signup modal and navigate to home
-		$.win.close({ animated: true })
+		dialog.addEventListener('click', function () {
+			$.win.close({ animated: true })
+		})
 
-		// Wait for modal close animation then open home
-		// Use setTimeout (not cleanupTracker) so this runs even after cleanup
-		setTimeout(function () {
-			const { open } = require('services/navigation')
-			open('home')
-		}, 300)
+		dialog.show()
 	}, 500)
 }
 

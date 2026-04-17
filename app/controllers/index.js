@@ -152,8 +152,19 @@ function forgotTap() {
   openModal('forgotPassword')
 }
 
+function completeSignup(user) {
+  login(user.email)
+  $.win.close({ animated: true })
+
+  setTimeout(function () {
+    open('home')
+  }, 300)
+}
+
 function signupTap() {
-  const ctrl = openModal('signup')
+  const ctrl = openModal('signup', {
+    onSignupComplete: completeSignup
+  })
   const win = ctrl.getView()
 
   win.addEventListener('close', resetLoginErrors)

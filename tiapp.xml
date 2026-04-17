@@ -16,6 +16,14 @@
   <ios>
     <enable-launch-screen-storyboard>true</enable-launch-screen-storyboard>
     <use-app-thinning>true</use-app-thinning>
+    <entitlements>
+      <dict>
+        <key>com.apple.developer.associated-domains</key>
+        <array>
+          <string>webcredentials:codigomovil.mx</string>
+        </array>
+      </dict>
+    </entitlements>
     <plist>
       <dict>
         <key>UISupportedInterfaceOrientations~iphone</key>

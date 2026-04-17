@@ -1,0 +1,18 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "RU3D9TXPMR.mx.codigomovil.urlschemes",
+        "paths": [
+          "/open/chat/*"
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "RU3D9TXPMR.mx.codigomovil.loginscreen"
+    ]
+  }
+}

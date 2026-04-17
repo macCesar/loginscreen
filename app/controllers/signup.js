@@ -6,6 +6,7 @@ const { createUser } = require('services/auth')
 let emailValid = false
 let passwordValid = false
 let confirmValid = false
+const args = arguments[0] || {}
 const cleanupTracker = createCleanup()
 
 // ── Dismiss keyboard on background tap ──
@@ -151,17 +152,17 @@ function doSignup() {
 		$.loader.applyProperties({ visible: false })
 		$.signupBtnLabel.applyProperties({ visible: true })
 
-		const dialog = Ti.UI.createAlertDialog({
-			buttonNames: ['Sign In'],
-			message: 'Your account was saved locally. Sign in with the email and password you just created.',
-			title: 'Account Created'
-		})
+		if (typeof args.onSignupComplete === 'function') {
+			$.win.addEventListener('close', function onSignupClose() {
+				$.win.removeEventListener('close', onSignupClose)
+				args.onSignupComplete(createResult.user)
+			})
 
-		dialog.addEventListener('click', function () {
 			$.win.close({ animated: true })
-		})
+			return
+		}
 
-		dialog.show()
+		$.win.close({ animated: true })
 	}, 500)
 }
 

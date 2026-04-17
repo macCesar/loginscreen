@@ -58,16 +58,21 @@ function validateEmail() {
   }
 }
 
-function validatePasswordEntry() {
-  if ($.passwordField.value.length > 0) {
-    hideFieldError($.passwordError)
-    setUnderlineColor($.passwordUnderline, colors.base)
-  }
-}
-
 // ── Focus handlers ──
 function focusPassword() {
   $.passwordField.focus()
+}
+
+function resetLoginErrors() {
+  const email = $.emailField.value.trim()
+
+  $.emailError.applyProperties({ text: 'Please enter a valid email address' })
+  hideFieldError($.emailError)
+  setUnderlineColor($.emailUnderline, email.length > 0 && isValidEmail(email) ? colors.success : colors.base)
+
+  $.passwordError.applyProperties({ text: 'Please enter your password' })
+  hideFieldError($.passwordError)
+  setUnderlineColor($.passwordUnderline, colors.base)
 }
 
 // ── Login ──
@@ -148,7 +153,10 @@ function forgotTap() {
 }
 
 function signupTap() {
-  openModal('signup')
+  const ctrl = openModal('signup')
+  const win = ctrl.getView()
+
+  win.addEventListener('close', resetLoginErrors)
 }
 
 // ── Cleanup ──

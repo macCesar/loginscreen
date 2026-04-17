@@ -24,7 +24,7 @@
 
       <View id="passwordGroup" class="fieldGroup mx-5 mt-5">
         <Label id="passwordLabel" class="fieldLabel">Password</Label>
-        <TextField id="passwordField" class="field password-mask autofill-type-password return-key-type-done" accessibilityLabel="Password field" accessibilityHint="Enter your password to sign in" hintText="Your password" onReturn="doLogin" onChange="validatePasswordEntry"/>
+        <TextField id="passwordField" class="field password-mask autofill-type-password return-key-type-done" accessibilityLabel="Password field" accessibilityHint="Enter your password to sign in" hintText="Your password" onReturn="doLogin"/>
         <View id="passwordUnderline" class="underline"/>
         <Label id="passwordError" class="fieldError">Please enter your password</Label>
       </View>

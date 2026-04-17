@@ -10,7 +10,7 @@
       <Label id="welcomeTitle" class="screenTitle">Welcome!</Label>
       <Label id="welcomeText" class="text-app-muted touch-enabled-false mt-3 w-screen text-center text-base">You have successfully signed in.</Label>
       <Label id="sessionEmail" class="text-app-muted text-(13) touch-enabled-false mt-2 w-screen text-center"/>
-      <Label id="sessionMeta" class="text-app-muted text-xs touch-enabled-false mt-1 w-screen text-center"/>
+      <Label id="sessionMeta" class="text-app-muted touch-enabled-false mt-1 w-screen text-center text-xs"/>
 
       <View id="logoutBtn" class="primaryBtn mx-10 mt-10" accessibilityLabel="Logout button" accessibilityHint="Tap to sign out of your account" onTouchstart="openButton" onTouchend="closeButton" onTouchcancel="closeButton" onClick="doLogout">
         <Label id="logoutBtnLabel" class="primaryBtnLabel">Sign Out</Label>

@@ -24,7 +24,7 @@
 
         <View id="emailGroup" class="fieldGroup mt-5">
           <Label id="emailLabel" class="fieldLabel">Email</Label>
-          <TextField id="emailField" class="field keyboard-type-email autofill-type-email autocorrect-false return-key-type-next normal-case" accessibilityLabel="Email address field" accessibilityHint="Enter your email address to create an account" hintText="you@example.com" onReturn="focusPassword" onChange="validateEmail"/>
+          <TextField id="emailField" class="field keyboard-type-email autofill-type-username autocorrect-false return-key-type-next normal-case" accessibilityLabel="Email address field" accessibilityHint="Enter your email address to create an account" hintText="you@example.com" onReturn="focusPassword" onChange="validateEmail"/>
           <View id="emailUnderline" class="underline"/>
           <Label id="emailError" class="fieldError">Please enter a valid email address</Label>
         </View>

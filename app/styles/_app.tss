@@ -1,0 +1,4 @@
+/*
+ * PurgeTSS owns this file after the first purge run.
+ * Keep custom persistent styles in app/styles/_app.tss or purgetss/config.cjs.
+ */

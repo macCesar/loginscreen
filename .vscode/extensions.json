@@ -1,5 +1,11 @@
 {
-	"recommendations": [
-		"tidev.titanium-sdk"
-	]
+  "recommendations": [
+    "tidev.titanium-sdk",
+    "DotJoshJohnson.xml",
+    "dbaeumer.vscode-eslint",
+    "bradlc.vscode-tailwindcss",
+    "EditorConfig.EditorConfig",
+    "Zignd.html-css-class-completion",
+    "KevinYouu.tailwind-raw-reorder-tw4"
+  ]
 }

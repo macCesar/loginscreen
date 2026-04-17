@@ -13,3 +13,4 @@ Thumbs.db
 .gradle/
 .idea/
 local.properties
+/node_modules

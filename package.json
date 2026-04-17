@@ -1,0 +1,27 @@
+{
+  "name": "loginscreen",
+  "version": "1.0.0",
+  "description": "A complete authentication flow demo built with **Titanium SDK 13.1.1.GA** and **Alloy MVC framework**. This project demonstrates best practices for implementing login, signup, and password reset flows with session persistence.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macCesar/loginscreen.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/macCesar/loginscreen/issues"
+  },
+  "homepage": "https://github.com/macCesar/loginscreen#readme",
+  "devDependencies": {
+    "eslint": "^9.39.4",
+    "eslint-config-axway": "^10.0.0",
+    "eslint-plugin-alloy": "^1.2.1",
+    "tailwindcss": "^3.4.19"
+  }
+}

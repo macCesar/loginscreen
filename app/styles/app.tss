@@ -1,143 +1,97 @@
+// PurgeTSS v7.5.3
+// Created by César Estrada
+// https://purgetss.com
+
+// _app.tss styles
 /*
- * Global Design Tokens & Shared Styles
- *
- * Colors:
- *   bg-dark:    #1a1a2e
- *   bg-card:    #16213e
- *   bg-accent:  #0f3460
- *   primary:    #e94560
- *   primary-dk: #c81d4e
- *   text-main:  #ffffff
- *   text-muted: #8d99ae
- *   error:      #e63946
- *   success:    #4ecca3
+ * PurgeTSS owns this file after the first purge run.
+ * Keep custom persistent styles in app/styles/_app.tss or purgetss/config.cjs.
  */
 
-"Window": {
-	backgroundColor: "backgroundColor"
-}
+// Ti Elements
+'View': { width: Ti.UI.SIZE, height: Ti.UI.SIZE }
+'Window': { backgroundColor: '#FFFFFF' }
 
-/* ── Shared background layers ── */
-".bgTop": {
-	width: Ti.UI.FILL,
-	height: Ti.UI.FILL,
-	top: 0,
-	touchEnabled: false
-}
+// Custom Styles
+'.auth-content': { height: Ti.UI.SIZE, layout: 'vertical', opacity: 0, width: '83.333334%' }
+'.backBtn': { bottom: 8, color: 'linkColor', textColor: 'linkColor', height: Ti.UI.SIZE, left: 20, width: Ti.UI.SIZE, font: { fontSize: 16 } }
+'.bgTop': { top: 0, touchEnabled: false, width: Ti.UI.FILL, height: Ti.UI.FILL }
+'.field': { color: 'textColor', font: { fontSize: 15 }, height: 40, hintTextColor: 'hintTextColor', paddingLeft: 4, textColor: 'textColor', top: 4, width: Ti.UI.FILL }
+'.fieldError': { color: 'errorColor', textColor: 'errorColor', height: 14, left: 4, opacity: 0, top: 4, touchEnabled: false, width: Ti.UI.SIZE, font: { fontSize: 11 } }
+'.fieldGroup': { height: Ti.UI.SIZE, layout: 'vertical', width: Ti.UI.FILL }
+'.fieldLabel': { color: 'textMutedColor', textColor: 'textMutedColor', height: Ti.UI.SIZE, left: 4, touchEnabled: false, width: Ti.UI.SIZE, font: { fontSize: 12, fontWeight: 'semibold' } }
+'.field[platform=android]': { backgroundColor: 'transparent' }
+'.header': { height: 60, left: 0, top: 0, width: Ti.UI.FILL, zIndex: 10 }
+'.login-card': { backgroundColor: 'cardColor', borderRadius: 16, height: Ti.UI.SIZE, layout: 'vertical', opacity: 0, top: '41.666667%', width: '83.333334%' }
+'.login-logo': { height: Ti.UI.SIZE, layout: 'vertical', opacity: 0, top: '8.333334%', width: Ti.UI.SIZE }
+'.primaryBtn': { borderRadius: 24, height: 48, top: 28, width: Ti.UI.FILL }
+'.primaryBtnLabel': { color: 'buttonTextColor', textColor: 'buttonTextColor', textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, touchEnabled: false, width: Ti.UI.FILL, font: { fontSize: 16, fontWeight: 'bold' } }
+'.screenIcon': { textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, touchEnabled: false, width: Ti.UI.FILL, font: { fontSize: 56 } }
+'.screenSubtitle': { color: 'textMutedColor', textColor: 'textMutedColor', textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, top: 8, touchEnabled: false, width: Ti.UI.FILL, font: { fontSize: 14 } }
+'.screenTitle': { color: 'textColor', textColor: 'textColor', textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER, top: 12, touchEnabled: false, width: Ti.UI.FILL, font: { fontSize: 26, fontWeight: 'bold' } }
+'.signup-row': { bottom: '5%', height: Ti.UI.SIZE, layout: 'horizontal', opacity: 0, width: Ti.UI.SIZE, zIndex: 10 }
+'.underline': { backgroundColor: 'underlineColor', height: 2, top: 0, width: Ti.UI.FILL }
 
-".bgBottom": {
-	width: Ti.UI.FILL,
-	height: Ti.UI.FILL,
-	bottom: 0,
-	touchEnabled: false,
-	backgroundColor: "bgBottomColor"
-}
+// Main Styles
+'.autocorrect-false': { autocorrect: false }
+'.autofill-type-email': { autofillType: Ti.UI.AUTOFILL_TYPE_EMAIL }
+'.autofill-type-new-password': { autofillType: Ti.UI.AUTOFILL_TYPE_NEW_PASSWORD }
+'.autofill-type-password': { autofillType: Ti.UI.AUTOFILL_TYPE_PASSWORD }
+'.autofill-type-username': { autofillType: Ti.UI.AUTOFILL_TYPE_USERNAME }
+'.bg-app': { backgroundColor: 'backgroundColor' }
+'.capitalize': { autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_WORDS }
+'.content-w-screen': { contentWidth: Ti.UI.FILL }
+'.duration-100': { duration: 100 }
+'.duration-200': { duration: 200 }
+'.duration-300': { duration: 300 }
+'.duration-400': { duration: 400 }
+'.duration-500': { duration: 500 }
+'.duration-75': { duration: 75 }
+'.ease-out': { curve: Ti.UI.ANIMATION_CURVE_EASE_OUT }
+'.font-bold': { font: { fontWeight: 'bold' } }
+'.h-auto': { height: Ti.UI.SIZE }
+'.h-screen': { height: Ti.UI.FILL }
+'.hidden': { visible: false }
+'.horizontal': { layout: 'horizontal' }
+'.keyboard-type-email': { keyboardType: Ti.UI.KEYBOARD_TYPE_EMAIL }
+'.mb-10': { bottom: 40 }
+'.mt-10': { top: 40 }
+'.mt-2': { top: 8 }
+'.mt-3': { top: 12 }
+'.mt-4': { top: 16 }
+'.mt-5': { top: 20 }
+'.mt-7': { top: 28 }
+'.mt-8': { top: 32 }
+'.mx-10': { right: 40, left: 40 }
+'.mx-5': { right: 20, left: 20 }
+'.normal-case': { autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE }
+'.opacity-0': { opacity: 0 }
+'.password-mask': { passwordMask: true }
+'.return-key-type-done': { returnKeyType: Ti.UI.RETURNKEY_DONE }
+'.return-key-type-next': { returnKeyType: Ti.UI.RETURNKEY_NEXT }
+'.show-vertical-scroll-indicator': { showVerticalScrollIndicator: true }
+'.text-app-link': { color: 'linkColor', textColor: 'linkColor' }
+'.text-app-muted': { color: 'textMutedColor', textColor: 'textMutedColor' }
+'.text-app-text': { color: 'textColor', textColor: 'textColor' }
+'.text-base': { font: { fontSize: 16 } }
+'.text-center': { textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER }
+'.text-right': { textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT }
+'.text-xs': { font: { fontSize: 12 } }
+'.top-1/4': { top: '25%' }
+'.top-3/12': { top: '25%' }
+'.touch-enabled-false': { touchEnabled: false }
+'.vertical': { layout: 'vertical' }
+'.w-auto': { width: Ti.UI.SIZE }
+'.w-screen': { width: Ti.UI.FILL }
 
-/* ── Shared header / back button ── */
-".header": {
-	top: 0,
-	left: 0,
-	width: Ti.UI.FILL,
-	height: 60,
-	zIndex: 10
-}
+// Animation Module
+'.close:opacity-100': { animationProperties: { close: { opacity: 1 } } }
+'.opacity-to-100': { opacity: 0, animationProperties: { open: { opacity: 1 }, close: { opacity: 0 } } }
+'.open:opacity-80': { animationProperties: { open: { opacity: 0.8 } } }
+'.zoom-in-90': { animationProperties: { open: { scale: 0.9 }, complete: { scale: 1 } } }
 
-".backBtn": {
-	color: "linkColor",
-	font: { fontSize: 16 },
-	left: 20,
-	bottom: 8,
-	width: Ti.UI.SIZE,
-	height: Ti.UI.SIZE
-}
-
-/* ── Shared field styles ── */
-".fieldGroup": {
-	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
-	layout: "vertical",
-	top: 20
-}
-
-".fieldLabel": {
-	color: "textMutedColor",
-	font: { fontSize: 12, fontWeight: "semibold" },
-	left: 4,
-	width: Ti.UI.SIZE,
-	height: Ti.UI.SIZE,
-	touchEnabled: false
-}
-
-".field": {
-	width: Ti.UI.FILL,
-	height: 40,
-	top: 4,
-	color: "textColor",
-	hintTextColor: "hintTextColor",
-	font: { fontSize: 15 },
-	paddingLeft: 4
-}
-
-".field[platform=android]": {
-	backgroundColor: "transparent"
-}
-
-".underline": {
-	width: Ti.UI.FILL,
-	height: 2,
-	backgroundColor: "underlineColor",
-	top: 0
-}
-
-".fieldError": {
-	color: "errorColor",
-	font: { fontSize: 11 },
-	left: 4,
-	top: 4,
-	width: Ti.UI.SIZE,
-	height: 14,
-	opacity: 0,
-	touchEnabled: false
-}
-
-/* ── Shared primary button ── */
-".primaryBtn": {
-	width: Ti.UI.FILL,
-	height: 48,
-	top: 28,
-	borderRadius: 24
-}
-
-".primaryBtnLabel": {
-	color: "buttonTextColor",
-	font: { fontSize: 16, fontWeight: "bold" },
-	textAlign: "center",
-	width: Ti.UI.FILL,
-	touchEnabled: false
-}
-
-/* ── Shared screen title area ── */
-".screenIcon": {
-	font: { fontSize: 56 },
-	textAlign: "center",
-	width: Ti.UI.FILL,
-	touchEnabled: false
-}
-
-".screenTitle": {
-	color: "textColor",
-	font: { fontSize: 26, fontWeight: "bold" },
-	textAlign: "center",
-	width: Ti.UI.FILL,
-	top: 12,
-	touchEnabled: false
-}
-
-".screenSubtitle": {
-	color: "textMutedColor",
-	font: { fontSize: 14 },
-	textAlign: "center",
-	width: Ti.UI.FILL,
-	top: 8,
-	touchEnabled: false
-}
+// Arbitrary Values
+'.text-(13)': { font: { fontSize: 13 } }
+'.text-(28)': { font: { fontSize: 28 } }
+'.text-(72)': { font: { fontSize: 72 } }
+'.top-(60)': { top: 60 }

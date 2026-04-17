@@ -1,5 +1,4 @@
 const { isValidEmail, showFieldError, hideFieldError, setUnderlineColor, colors } = require('helpers/validation')
-const { shakeView, addButtonFeedback } = require('helpers/animation')
 const { createCleanup } = require('helpers/cleanup')
 const { applyBgTopGradient, applyPrimaryButtonGradient } = require('helpers/gradients')
 const { openModal } = require('services/navigation')
@@ -25,11 +24,7 @@ cleanupTracker.on($.win, 'click', onWinClick)
 
 // ── Entrance animation ──
 function runEntrance() {
-	$.content.animate({
-		opacity: 1,
-		duration: 500,
-		curve: Ti.UI.ANIMATION_CURVE_EASE_OUT
-	})
+	$.contentEntrance.open($.content)
 }
 
 function applyGradients() {
@@ -114,22 +109,22 @@ function doSignup() {
 	const name = $.nameField.value ? $.nameField.value.trim() : ''
 
 	if (name.length === 0) {
-		shakeView($.nameGroup)
+		$.shakeAnim.shake($.nameGroup, 8)
 		return
 	}
 
 	if (!emailValid) {
-		shakeView($.emailGroup)
+		$.shakeAnim.shake($.emailGroup, 8)
 		return
 	}
 
 	if (!passwordValid) {
-		shakeView($.passwordGroup)
+		$.shakeAnim.shake($.passwordGroup, 8)
 		return
 	}
 
 	if (!confirmValid) {
-		shakeView($.confirmGroup)
+		$.shakeAnim.shake($.confirmGroup, 8)
 		return
 	}
 
@@ -158,7 +153,13 @@ function doSignup() {
 }
 
 // ── Button press feedback ──
-addButtonFeedback($.signupBtn, cleanupTracker)
+function openButton(e) {
+	$.buttonPressAnim.open(e.source)
+}
+
+function closeButton(e) {
+	$.buttonPressAnim.close(e.source)
+}
 
 // ── Navigation ──
 function goBack() {

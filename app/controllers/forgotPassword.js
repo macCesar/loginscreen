@@ -1,5 +1,4 @@
 const { isValidEmail, showFieldError, hideFieldError, setUnderlineColor, colors } = require('helpers/validation')
-const { shakeView, addButtonFeedback } = require('helpers/animation')
 const { createCleanup } = require('helpers/cleanup')
 const { applyBgTopGradient, applyPrimaryButtonGradient } = require('helpers/gradients')
 
@@ -18,11 +17,7 @@ cleanupTracker.on($.win, 'click', onWinClick)
 
 // ── Entrance animation ──
 function runEntrance() {
-	$.content.animate({
-		opacity: 1,
-		duration: 500,
-		curve: Ti.UI.ANIMATION_CURVE_EASE_OUT
-	})
+	$.contentEntrance.open($.content)
 }
 
 function applyGradients() {
@@ -53,7 +48,7 @@ function doSend() {
 	validateEmail()
 
 	if (!emailValid) {
-		shakeView($.emailGroup)
+		$.shakeAnim.shake($.emailGroup, 8)
 		return
 	}
 
@@ -66,20 +61,22 @@ function doSend() {
 		$.loader.applyProperties({ visible: false })
 		$.sendBtnLabel.applyProperties({ visible: true })
 
-		$.content.animate({ opacity: 0, duration: 300 }, function () {
+		$.contentEntrance.close($.content, function () {
 			$.content.applyProperties({ visible: false })
 			$.confirmation.applyProperties({ visible: true })
-			$.confirmation.animate({
-				opacity: 1,
-				duration: 500,
-				curve: Ti.UI.ANIMATION_CURVE_EASE_OUT
-			})
+			$.contentEntrance.open($.confirmation)
 		})
 	}, 1500)
 }
 
 // ── Button press feedback ──
-addButtonFeedback($.sendBtn, cleanupTracker)
+function openButton(e) {
+	$.buttonPressAnim.open(e.source)
+}
+
+function closeButton(e) {
+	$.buttonPressAnim.close(e.source)
+}
 
 // ── Navigation ──
 function goBack() {

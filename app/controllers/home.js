@@ -1,7 +1,6 @@
 const { logout } = require('services/auth')
 const { createCleanup } = require('helpers/cleanup')
 const { applyBgTopGradient, applyPrimaryButtonGradient } = require('helpers/gradients')
-const { addButtonFeedback } = require('helpers/animation')
 const Logger = require('services/logger')
 
 const cleanupTracker = createCleanup()
@@ -11,11 +10,7 @@ log.info('Controller loaded')
 
 // ── Entrance animation ──
 function runEntrance() {
-	$.content.animate({
-		opacity: 1,
-		duration: 500,
-		curve: Ti.UI.ANIMATION_CURVE_EASE_OUT
-	})
+	$.contentEntrance.open($.content)
 }
 
 function applyGradients() {
@@ -44,7 +39,13 @@ function doLogout() {
 }
 
 // ── Button press feedback ──
-addButtonFeedback($.logoutBtn, cleanupTracker)
+function openButton(e) {
+	$.buttonPressAnim.open(e.source)
+}
+
+function closeButton(e) {
+	$.buttonPressAnim.close(e.source)
+}
 
 // ── Cleanup ──
 function cleanup() {

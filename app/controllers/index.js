@@ -2,7 +2,6 @@ const { createCleanup } = require('helpers/cleanup')
 const { isLoggedIn, login } = require('services/auth')
 const Logger = require('services/logger')
 const { openModal, open } = require('services/navigation')
-const { shakeView, addButtonFeedback } = require('helpers/animation')
 const { applyBgTopGradient, applyPrimaryButtonGradient } = require('helpers/gradients')
 const { isValidEmail, showFieldError, hideFieldError, setUnderlineColor, colors } = require('helpers/validation')
 
@@ -15,11 +14,6 @@ Logger.init({
 })
 Logger.logSystemInfo('APP_INIT')
 log.info('Controller loaded')
-
-// Set initial card transform (can't use createMatrix2D in TSS)
-$.card.applyProperties({
-  transform: Ti.UI.createMatrix2D({ scale: 0.9 })
-})
 
 // ── Dismiss keyboard on background tap ──
 function onWinClick(e) {
@@ -34,29 +28,9 @@ cleanupTracker.on($.win, 'click', onWinClick)
 
 // ── Entrance animations ──
 function runEntrance() {
-  const logoAnim = Ti.UI.createAnimation({
-    opacity: 1,
-    top: '12%',
-    duration: 600,
-    curve: Ti.UI.ANIMATION_CURVE_EASE_OUT
-  })
-
-  const cardAnim = Ti.UI.createAnimation({
-    opacity: 1,
-    transform: Ti.UI.createMatrix2D(),
-    duration: 500,
-    curve: Ti.UI.ANIMATION_CURVE_EASE_OUT
-  })
-
-  const signupAnim = Ti.UI.createAnimation({
-    opacity: 1,
-    duration: 400,
-    curve: Ti.UI.ANIMATION_CURVE_EASE_OUT
-  })
-
-  $.logoContainer.animate(logoAnim, function () {
-    $.card.animate(cardAnim, function () {
-      $.signupRow.animate(signupAnim)
+  $.logoEntrance.open($.logoContainer, function () {
+    $.cardEntrance.open($.card, function () {
+      $.signupEntrance.open($.signupRow)
     })
   })
 }
@@ -96,12 +70,12 @@ function doLogin() {
   const password = $.passwordField.value
 
   if (!emailValid) {
-    shakeView($.emailGroup)
+    $.shakeAnim.shake($.emailGroup, 8)
     return
   }
 
   if (!password || password.length === 0) {
-    shakeView($.passwordGroup)
+    $.shakeAnim.shake($.passwordGroup, 8)
     return
   }
 
@@ -130,7 +104,13 @@ function doLogin() {
 }
 
 // ── Button press feedback ──
-addButtonFeedback($.loginBtn, cleanupTracker)
+function openButton(e) {
+  $.buttonPressAnim.open(e.source)
+}
+
+function closeButton(e) {
+  $.buttonPressAnim.close(e.source)
+}
 
 // ── Navigation ──
 function forgotTap() {

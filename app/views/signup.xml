@@ -1,58 +1,56 @@
 <Alloy>
-  <Window id="win">
-		<View id="bgTop" class="bgTop"/>
+  <Window id="win" class="bg-app">
+    <Animation id="contentEntrance" module="purgetss.ui" class="opacity-to-100 duration-500 ease-out"/>
+    <Animation id="buttonPressAnim" module="purgetss.ui" class="close:opacity-100 duration-100 ease-out open:opacity-80"/>
+    <Animation id="shakeAnim" module="purgetss.ui" class="duration-75 ease-out"/>
 
-		<View class="header">
-			<Label id="backBtn" class="backBtn" accessibilityLabel="Back button" accessibilityHint="Return to login screen" onClick="goBack">← Back</Label>
-		</View>
+    <View id="bgTop" class="bgTop"/>
 
-    <ScrollView id="scrollView" contentWidth="Ti.UI.FILL" showVerticalScrollIndicator="true">
-      <View id="content">
-				<Label class="screenIcon">🚀</Label>
-				<Label id="screenTitle" class="screenTitle">Create Account</Label>
-				<Label id="screenSubtitle" class="screenSubtitle">Fill in the details below to get started.</Label>
+    <View class="header">
+      <Label id="backBtn" class="backBtn" accessibilityLabel="Back button" accessibilityHint="Return to login screen" onClick="goBack">← Back</Label>
+    </View>
 
-        <!-- Name -->
-        <View id="nameGroup" class="fieldGroup">
-					<Label id="nameLabel" class="fieldLabel">Full Name</Label>
-          <TextField id="nameField" class="field" accessibilityLabel="Full name field" accessibilityHint="Enter your full name" hintText="John Doe" autocapitalization="Ti.UI.TEXT_AUTOCAPITALIZATION_WORDS" returnKeyType="Ti.UI.RETURNKEY_NEXT" onReturn="focusEmail"/>
+    <ScrollView id="scrollView" class="top-(60) content-w-screen show-vertical-scroll-indicator h-screen w-screen">
+      <View id="content" class="auth-content mt-5">
+        <Label class="screenIcon">🚀</Label>
+        <Label id="screenTitle" class="screenTitle">Create Account</Label>
+        <Label id="screenSubtitle" class="screenSubtitle">Fill in the details below to get started.</Label>
+
+        <View id="nameGroup" class="fieldGroup mt-5">
+          <Label id="nameLabel" class="fieldLabel">Full Name</Label>
+          <TextField id="nameField" class="field return-key-type-next capitalize" accessibilityLabel="Full name field" accessibilityHint="Enter your full name" hintText="John Doe" onReturn="focusEmail"/>
           <View id="nameUnderline" class="underline"/>
         </View>
 
-        <!-- Email -->
-        <View id="emailGroup" class="fieldGroup">
-					<Label id="emailLabel" class="fieldLabel">Email</Label>
-          <TextField id="emailField" class="field" accessibilityLabel="Email address field" accessibilityHint="Enter your email address to create an account" hintText="you@example.com" keyboardType="Ti.UI.KEYBOARD_TYPE_EMAIL" autofillType="Ti.UI.AUTOFILL_TYPE_EMAIL" autocapitalization="Ti.UI.TEXT_AUTOCAPITALIZATION_NONE" autocorrect="false" returnKeyType="Ti.UI.RETURNKEY_NEXT" onReturn="focusPassword" onChange="validateEmail"/>
+        <View id="emailGroup" class="fieldGroup mt-5">
+          <Label id="emailLabel" class="fieldLabel">Email</Label>
+          <TextField id="emailField" class="field keyboard-type-email autofill-type-email autocorrect-false return-key-type-next normal-case" accessibilityLabel="Email address field" accessibilityHint="Enter your email address to create an account" hintText="you@example.com" onReturn="focusPassword" onChange="validateEmail"/>
           <View id="emailUnderline" class="underline"/>
           <Label id="emailError" class="fieldError">Please enter a valid email address</Label>
         </View>
 
-        <!-- Password -->
-        <View id="passwordGroup" class="fieldGroup">
-					<Label id="passwordLabel" class="fieldLabel">Password</Label>
-          <TextField id="passwordField" class="field" accessibilityLabel="Password field" accessibilityHint="Enter a password with at least 8 characters" hintText="Min. 8 characters" passwordMask="true" autofillType="Ti.UI.AUTOFILL_TYPE_NEW_PASSWORD" returnKeyType="Ti.UI.RETURNKEY_NEXT" onReturn="focusConfirm" onChange="validatePassword"/>
+        <View id="passwordGroup" class="fieldGroup mt-5">
+          <Label id="passwordLabel" class="fieldLabel">Password</Label>
+          <TextField id="passwordField" class="field password-mask autofill-type-new-password return-key-type-next" accessibilityLabel="Password field" accessibilityHint="Enter a password with at least 8 characters" hintText="Min. 8 characters" onReturn="focusConfirm" onChange="validatePassword"/>
           <View id="passwordUnderline" class="underline"/>
           <Label id="passwordError" class="fieldError">Password must be at least 8 characters</Label>
         </View>
 
-        <!-- Confirm Password -->
-        <View id="confirmGroup" class="fieldGroup">
-					<Label id="confirmLabel" class="fieldLabel">Confirm Password</Label>
-          <TextField id="confirmField" class="field" accessibilityLabel="Confirm password field" accessibilityHint="Re-enter your password to confirm" hintText="Re-enter your password" passwordMask="true" autofillType="Ti.UI.AUTOFILL_TYPE_NEW_PASSWORD" returnKeyType="Ti.UI.RETURNKEY_DONE" onReturn="doSignup" onChange="validateConfirm"/>
+        <View id="confirmGroup" class="fieldGroup mt-5">
+          <Label id="confirmLabel" class="fieldLabel">Confirm Password</Label>
+          <TextField id="confirmField" class="field password-mask autofill-type-new-password return-key-type-done" accessibilityLabel="Confirm password field" accessibilityHint="Re-enter your password to confirm" hintText="Re-enter your password" onReturn="doSignup" onChange="validateConfirm"/>
           <View id="confirmUnderline" class="underline"/>
           <Label id="confirmError" class="fieldError">Passwords do not match</Label>
         </View>
 
-        <!-- Sign Up Button -->
-        <View id="signupBtn" class="primaryBtn" accessibilityLabel="Create account button" accessibilityHint="Tap to create your account" onClick="doSignup">
+        <View id="signupBtn" class="primaryBtn" accessibilityLabel="Create account button" accessibilityHint="Tap to create your account" onTouchstart="openButton" onTouchend="closeButton" onTouchcancel="closeButton" onClick="doSignup">
           <Label id="signupBtnLabel" class="primaryBtnLabel">Create Account</Label>
         </View>
-        <ActivityIndicator id="loader" visible="false"/>
+        <ActivityIndicator id="loader" class="mt-4 hidden"/>
 
-        <!-- Already have account -->
-        <View id="loginRow">
-          <Label id="loginText">Already have an account? </Label>
-          <Label id="loginLink" accessibilityLabel="Sign in link" accessibilityHint="Tap to return to the login screen" onClick="goBack">Sign In</Label>
+        <View id="loginRow" class="horizontal mb-10 mt-5 h-auto w-auto">
+          <Label id="loginText" class="text-app-muted text-(13) touch-enabled-false h-auto w-auto">Already have an account? </Label>
+          <Label id="loginLink" class="text-app-link text-(13) h-auto w-auto font-bold" accessibilityLabel="Sign in link" accessibilityHint="Tap to return to the login screen" onClick="goBack">Sign In</Label>
         </View>
       </View>
     </ScrollView>

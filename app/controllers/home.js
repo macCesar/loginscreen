@@ -2,11 +2,12 @@ const { logout } = require('services/auth')
 const { createCleanup } = require('helpers/cleanup')
 const { applyBgTopGradient, applyPrimaryButtonGradient } = require('helpers/gradients')
 const { addButtonFeedback } = require('helpers/animation')
-const { info, debug, error } = require('services/logger')
+const Logger = require('services/logger')
 
 const cleanupTracker = createCleanup()
+const log = Logger.create('HOME')
 
-info('HOME', 'Controller loaded')
+log.info('Controller loaded')
 
 // ── Entrance animation ──
 function runEntrance() {
@@ -24,16 +25,16 @@ function applyGradients() {
 
 // ── Logout ──
 function doLogout() {
-	info('HOME', 'Logout button clicked')
+	log.info('Logout button clicked')
 
 	// Clear login state
 	logout()
-	info('HOME', 'Login state cleared, closing home window')
+	log.info('Login state cleared, closing home window')
 
 	// Listen for window close before opening login
 	$.win.addEventListener('close', function onWindowClose() {
 		$.win.removeEventListener('close', onWindowClose)
-		info('HOME', 'Home window closed, opening login screen')
+		log.info('Home window closed, opening login screen')
 		const { open } = require('services/navigation')
 		open('index')
 	})
@@ -53,6 +54,6 @@ function cleanup() {
 
 $.cleanup = cleanup
 cleanupTracker.on($.win, 'open', runEntrance)
-info('HOME', 'Setting up window open listener')
+log.info('Setting up window open listener')
 applyGradients()
-info('HOME', 'Gradients applied, window will open')
+log.info('Gradients applied, window will open')

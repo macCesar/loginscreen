@@ -177,12 +177,16 @@ logout()  // Clear session
 ```
 
 ### 3. Smart Logger
-Auto-detects environment:
+Auto-detects environment and supports module tags:
 ```javascript
-const { info, error } = require('services/logger')
+const Logger = require('services/logger')
+const { info, error } = Logger.create('INDEX')
 
-info('TAG', 'This only shows in dev/test')
-error('TAG', 'This always shows (even in production)')
+// In app startup (index controller), configure once:
+Logger.init({ includeTimestamp: true })
+
+info('This only shows in dev/test')
+error('This always shows (even in production)')
 ```
 
 ### 4. applyProperties Pattern

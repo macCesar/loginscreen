@@ -1,6 +1,6 @@
 const { createCleanup } = require('helpers/cleanup')
 const { isLoggedIn, login } = require('services/auth')
-const { info, debug, error } = require('services/logger')
+const Logger = require('services/logger')
 const { openModal, open } = require('services/navigation')
 const { shakeView, addButtonFeedback } = require('helpers/animation')
 const { applyBgTopGradient, applyPrimaryButtonGradient } = require('helpers/gradients')
@@ -8,8 +8,13 @@ const { isValidEmail, showFieldError, hideFieldError, setUnderlineColor, colors 
 
 let emailValid = false
 const cleanupTracker = createCleanup()
+const log = Logger.create('INDEX')
 
-info('INDEX', 'Controller loaded')
+Logger.init({
+  includeTimestamp: true
+})
+Logger.logSystemInfo('APP_INIT')
+log.info('Controller loaded')
 
 // Set initial card transform (can't use createMatrix2D in TSS)
 $.card.applyProperties({
@@ -85,7 +90,7 @@ function focusPassword() {
 
 // ── Login ──
 function doLogin() {
-  info('INDEX', 'Login button clicked')
+  log.info('Login button clicked')
   validateEmail()
 
   const password = $.passwordField.value
@@ -105,20 +110,20 @@ function doLogin() {
   $.loader.show()
 
   cleanupTracker.timeout(function () {
-    info('INDEX', 'Login successful, saving state and navigating to home')
+    log.info('Login successful, saving state and navigating to home')
     $.loader.hide()
     $.loader.applyProperties({ visible: false })
     $.loginBtnLabel.applyProperties({ visible: true })
 
     // Save login state and navigate to home
     login()
-    info('INDEX', 'State saved, closing login window')
+    log.info('State saved, closing login window')
     $.win.close({ animated: true })
 
     // Wait for close animation then open home
     // Use setTimeout (not cleanupTracker) so this runs even after cleanup
     setTimeout(function () {
-      info('INDEX', 'Opening home window')
+      log.info('Opening home window')
       open('home')
     }, 300)
   }, 500)
@@ -145,14 +150,14 @@ function cleanup() {
 $.cleanup = cleanup
 
 // ── Check if user is already logged in ──
-info('INDEX', 'Checking login status...')
+log.info('Checking login status...')
 if (isLoggedIn()) {
-  info('INDEX', 'User already logged in, opening home directly')
+  log.info('User already logged in, opening home directly')
   // User already logged in, go directly to home
   // Don't open login window, just open home
   open('home')
 } else {
-  info('INDEX', 'User not logged in, showing login screen')
+  log.info('User not logged in, showing login screen')
   // Show login screen
   cleanupTracker.on($.win, 'open', runEntrance)
   applyGradients()

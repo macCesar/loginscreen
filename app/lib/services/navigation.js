@@ -3,7 +3,8 @@
  * Handles modal opening and ensures proper memory cleanup
  */
 
-const { info, error } = require('services/logger')
+const Logger = require('services/logger')
+const log = Logger.create('NAV')
 
 /**
  * Open a controller as a modal window
@@ -14,13 +15,13 @@ const { info, error } = require('services/logger')
  * @returns {Object} The controller instance
  */
 exports.openModal = function (route, params = {}) {
-	info('NAV', `Opening modal: ${route}`)
+	log.info(`Opening modal: ${route}`)
 	const ctrl = Alloy.createController(route, params)
 	const win = ctrl.getView()
 
 	// Ensure cleanup is called when window closes
 	win.addEventListener('close', function () {
-		info('NAV', `Modal closed: ${route}`)
+		log.info(`Modal closed: ${route}`)
 		if (ctrl.cleanup) {
 			ctrl.cleanup()
 		}
@@ -40,18 +41,18 @@ exports.openModal = function (route, params = {}) {
  * @returns {Object} The controller instance
  */
 exports.open = function (route, params = {}, openProps = {}) {
-	info('NAV', `Opening window: ${route}`)
+	log.info(`Opening window: ${route}`)
 	const ctrl = Alloy.createController(route, params)
 	const win = ctrl.getView()
 
 	win.addEventListener('close', function () {
-		info('NAV', `Window closed: ${route}`)
+		log.info(`Window closed: ${route}`)
 		if (ctrl.cleanup) {
 			ctrl.cleanup()
 		}
 	})
 
 	win.open(openProps)
-	info('NAV', `Window opened successfully: ${route}`)
+	log.info(`Window opened successfully: ${route}`)
 	return ctrl
 }

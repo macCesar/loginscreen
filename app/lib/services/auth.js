@@ -3,9 +3,10 @@
  * Uses Ti.App.Properties for simple key-value storage
  */
 
-const { info } = require('services/logger')
+const Logger = require('services/logger')
 
 const IS_LOGGED_IN_KEY = 'isLoggedIn'
+const log = Logger.create('AUTH')
 
 /**
  * Check if user is currently logged in
@@ -13,7 +14,7 @@ const IS_LOGGED_IN_KEY = 'isLoggedIn'
  */
 exports.isLoggedIn = function () {
 	const status = Ti.App.Properties.getBool(IS_LOGGED_IN_KEY, false)
-	info('AUTH', `Checking login status: ${status}`)
+	log.info(`Checking login status: ${status}`)
 	return status
 }
 
@@ -22,7 +23,7 @@ exports.isLoggedIn = function () {
  */
 exports.login = function () {
 	Ti.App.Properties.setBool(IS_LOGGED_IN_KEY, true)
-	info('AUTH', 'Login state saved: true')
+	log.info('Login state saved: true')
 }
 
 /**
@@ -30,5 +31,5 @@ exports.login = function () {
  */
 exports.logout = function () {
 	Ti.App.Properties.setBool(IS_LOGGED_IN_KEY, false)
-	info('AUTH', 'Login state cleared: false')
+	log.info('Login state cleared: false')
 }
